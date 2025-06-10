@@ -1,13 +1,14 @@
 import React, { use, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 // import { AuthContext } from "../context/AuthContext";
 
 
 const Navbar = () => {
 	const [dropdownOpen, setDropdownOpen] = useState(false);
-	// const { user, signOutUser } = use(AuthContext);
-	// const navigate = useNavigate();
+	const { user, signOutUser } = use(AuthContext);
+	const navigate = useNavigate();
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 	const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
@@ -149,6 +150,7 @@ const Navbar = () => {
 			<div className=""></div>
 
 			<div className="space-x-4 flex items-center">
+			{!user ? (
 				<>
 					<Link
 						to="/signin"
@@ -163,7 +165,7 @@ const Navbar = () => {
 						Register
 					</Link>
 				</>
-
+			): (
 				<>
 					<div
 						className="relative"
@@ -193,6 +195,7 @@ const Navbar = () => {
 						)}
 					</div>
 				</>
+			)}
 			</div>
 		</header>
 	);
