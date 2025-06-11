@@ -13,15 +13,15 @@ const Navbar = () => {
 
 	const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
 
-	// const handleSignOut = () => {
-	// 	signOutUser()
-	// 		.then(() => {
-	// 			navigate("/");
-	// 		})
-	// 		.catch((error) => {
-	// 			console.error("Sign out error:", error);
-	// 		});
-	// };
+	const handleSignOut = () => {
+		signOutUser()
+			.then(() => {
+				navigate("/");
+			})
+			.catch((error) => {
+				console.error("Sign out error:", error);
+			});
+	};
 
 	const toggleDropdown = () => {
 		setDropdownOpen(!dropdownOpen);
@@ -169,15 +169,15 @@ const Navbar = () => {
 				<>
 					<div
 						className="relative"
-						onMouseEnter={() => setDropdownOpen(true)}
-						onMouseLeave={() => setDropdownOpen(false)}
+					
+						
 					>
 						<button
 							onClick={toggleDropdown}
 							className="flex items-center space-x-2"
 						>
 							<img
-								// src={user.photoURL || "https://via.placeholder.com/40"}
+								src={user.photoURL || "https://via.placeholder.com/40"}
 								alt="User Profile"
 								className="w-10 h-10 rounded-full"
 							/>
@@ -187,7 +187,7 @@ const Navbar = () => {
 							<div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg w-48 max-w-xs h-auto z-50">
 								<div className="py-2 px-4 text-sm text-gray-700">
 									{/* <h2 className="font-bold text-lg">{user.displayName}</h2> */}
-									<button className="btn btn-sm bg-red-700 rounded-lg text-left text-lg mt-4 py-3 px-4 text-white hover:bg-red-100">
+									<button onClick={handleSignOut} className="btn btn-sm bg-red-700 rounded-lg text-left text-lg mt-4 py-3 px-4 text-white hover:bg-red-100">
 										Sign Out
 									</button>
 								</div>

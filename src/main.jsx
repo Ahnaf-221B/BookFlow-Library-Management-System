@@ -9,6 +9,7 @@ import SignIn from './pages/SignIn/SignIn.jsx'
 import AuthProvider from './context/AuthProvider.jsx'
 import { ToastContainer } from 'react-toastify'
 import SignUp from './pages/SignUp/SignUp.jsx'
+import AddBook from './pages/AddBook/AddBook.jsx'
 
 const router = createBrowserRouter([
 
@@ -27,6 +28,9 @@ const router = createBrowserRouter([
       {
         path:'/signup',
         element: <SignUp></SignUp>
+      },{
+        path: '/addbooks',
+        element :<AddBook></AddBook>
       }
     ]
   }
