@@ -12,6 +12,8 @@ import SignUp from './pages/SignUp/SignUp.jsx'
 import AddBook from './pages/AddBook/AddBook.jsx'
 import Novel from './pages/BookCategory/BooksCategory.jsx'
 import BookCategory from './pages/BookCategory/BooksCategory.jsx'
+import AllBooks from './pages/AllBooks/AllBooks.jsx'
+import BookDetails from './pages/BookDetails/BookDetails.jsx'
 
 const router = createBrowserRouter([
 	{
@@ -38,6 +40,14 @@ const router = createBrowserRouter([
 				path: "/category/:category",
 				element: <BookCategory></BookCategory>,
 			},
+			{
+				path: '/allbooks',
+				element:<AllBooks></AllBooks>
+			},
+			{
+				path:'/bookdetail/:id',
+				element: <BookDetails></BookDetails>
+			}
 		],
 	},
 ]);

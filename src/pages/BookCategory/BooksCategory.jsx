@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 import Rating from "react-rating";
@@ -41,12 +41,14 @@ const BookCategory = () => {
 							emptySymbol={<span className="text-gray-300 text-xl">☆</span>}
 							fullSymbol={<span className="text-yellow-400 text-xl">★</span>}
 						/>
-						<p className="mt-2 text-sm text-gray-700">
-							{book.shortDescription}
-						</p>
-						<button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-							Details
-						</button>
+						<br />
+						
+
+						<Link to={`/bookdetail/${book._id}`}>
+							<button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+								Details
+							</button>
+						</Link>
 					</div>
 				))}
 			</div>
