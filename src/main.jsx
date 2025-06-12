@@ -10,31 +10,37 @@ import AuthProvider from './context/AuthProvider.jsx'
 import { ToastContainer } from 'react-toastify'
 import SignUp from './pages/SignUp/SignUp.jsx'
 import AddBook from './pages/AddBook/AddBook.jsx'
+import Novel from './pages/BookCategory/BooksCategory.jsx'
+import BookCategory from './pages/BookCategory/BooksCategory.jsx'
 
 const router = createBrowserRouter([
-
-  {
-    path: '/',
-    element: <MainLayout></MainLayout>,
-    children: [
-      {
-        index:true,
-        element: <Home></Home>
-      },
-      {
-        path: '/signin',
-        element: <SignIn></SignIn>
-      },
-      {
-        path:'/signup',
-        element: <SignUp></SignUp>
-      },{
-        path: '/addbooks',
-        element :<AddBook></AddBook>
-      }
-    ]
-  }
-])
+	{
+		path: "/",
+		element: <MainLayout></MainLayout>,
+		children: [
+			{
+				index: true,
+				element: <Home></Home>,
+			},
+			{
+				path: "/signin",
+				element: <SignIn></SignIn>,
+			},
+			{
+				path: "/signup",
+				element: <SignUp></SignUp>,
+			},
+			{
+				path: "/addbooks",
+				element: <AddBook></AddBook>,
+			},
+			{
+				path: "/category/:category",
+				element: <BookCategory></BookCategory>,
+			},
+		],
+	},
+]);
 createRoot(document.getElementById("root")).render(
 	<StrictMode>
     <AuthProvider>

@@ -99,7 +99,7 @@ const AddBook = () => {
 						<option value="Novel">Novel</option>
 						<option value="Thriller">Thriller</option>
 						<option value="History">History</option>
-						<option value="Drama">Drama</option>
+						
 						<option value="Sci-Fi">Sci-Fi</option>
 					</select>
 					{errors.category && (
