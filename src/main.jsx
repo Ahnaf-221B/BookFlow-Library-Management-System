@@ -14,6 +14,8 @@ import Novel from './pages/BookCategory/BooksCategory.jsx'
 import BookCategory from './pages/BookCategory/BooksCategory.jsx'
 import AllBooks from './pages/AllBooks/AllBooks.jsx'
 import BookDetails from './pages/BookDetails/BookDetails.jsx'
+import BorrowedBooks from './pages/BorrowedBooks/BorrowedBooks.jsx'
+import UpdateBook from './pages/UpdateBook/UpdateBook.jsx'
 
 const router = createBrowserRouter([
 	{
@@ -41,13 +43,21 @@ const router = createBrowserRouter([
 				element: <BookCategory></BookCategory>,
 			},
 			{
-				path: '/allbooks',
-				element:<AllBooks></AllBooks>
+				path: "/allbooks",
+				element: <AllBooks></AllBooks>,
 			},
 			{
-				path:'/bookdetail/:id',
-				element: <BookDetails></BookDetails>
-			}
+				path: "/bookdetail/:id",
+				element: <BookDetails></BookDetails>,
+			},
+			{
+				path: "/borrowedbooks",
+				element: <BorrowedBooks></BorrowedBooks>,
+			},
+			{
+				path: "/update-book/:id",
+				element: <UpdateBook></UpdateBook>,
+			},
 		],
 	},
 ]);

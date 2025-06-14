@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaStar } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const AllBooks = () => {
 	const [books, setBooks] = useState([]);
@@ -46,11 +47,12 @@ const AllBooks = () => {
 								/>
 							))}
 						</div>
-                        
 
-						<button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-							Update
-						</button>
+						<Link to={`/update-book/${book._id}`}>
+							<button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+								Update
+							</button>
+						</Link>
 					</div>
 				))}
 			</div>
