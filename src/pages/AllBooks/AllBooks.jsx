@@ -5,22 +5,48 @@ import { Link } from "react-router-dom";
 
 const AllBooks = () => {
 	const [books, setBooks] = useState([]);
-    const [showAll, setShowAll] = useState(false);
+	const [showAll, setShowAll] = useState(false);
+	const [showAvailableOnly, setShowAvailableOnly] = useState(false);
 
-	axios
-		.get("http://localhost:3000/books")
-		.then((res) => {
-			setBooks(res.data);
-		})
-		.catch((error) => {
-			console.error("Error fetching books:", error);
-		});
+	useEffect(() => {
+		axios
+			.get("http://localhost:3000/books")
+			.then((res) => {
+				setBooks(res.data);
+			})
+			.catch((error) => {
+				console.error("Error fetching books:", error);
+			});
+	}, []);
 
-        const displayedBooks = showAll ? books : books.slice(0, 8);
+	
+	const filteredBooks = showAvailableOnly
+		? books.filter((book) => book.quantity > 0)
+		: books;
+
+
+	const displayedBooks = showAll ? filteredBooks : filteredBooks.slice(0, 8);
 
 	return (
 		<div className="p-6">
 			<h1 className="text-3xl font-bold text-center mb-8">All Books</h1>
+
+			<div className="flex justify-center gap-4 mb-6">
+				<button
+					onClick={() => {
+						setShowAvailableOnly((prev) => !prev);
+						setShowAll(false); 
+					}}
+					className={`px-4 py-2 rounded ${
+						showAvailableOnly ? "bg-yellow-600" : "bg-yellow-500"
+					} text-white`}
+				>
+					{showAvailableOnly ? "Show All Books" : "Show Available Books"}
+				</button>
+
+				
+			</div>
+
 			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 				{displayedBooks.map((book) => (
 					<div
@@ -57,7 +83,8 @@ const AllBooks = () => {
 				))}
 			</div>
 
-			{books.length > 8 && !showAll && (
+			
+			{filteredBooks.length > 8 && !showAll && (
 				<div className="flex justify-center mt-8">
 					<button
 						onClick={() => setShowAll(true)}

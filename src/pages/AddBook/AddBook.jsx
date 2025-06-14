@@ -14,8 +14,7 @@ const AddBook = () => {
 
 	const onSubmit = async (data) => {
         const response = await axios.post("http://localhost:3000/books",data)
-		// If you want to preview the image, you can access it like:
-		// const imageFile = data.image[0];
+		
 		console.log('Book addded successfully',response.data);
         Swal.fire({
 					position: "top-end",
@@ -24,7 +23,7 @@ const AddBook = () => {
 					showConfirmButton: false,
 					timer: 1500,
 				});
-		// Send `data` to your database or API here
+		
 		reset();
 	};
 
@@ -65,7 +64,7 @@ const AddBook = () => {
 					<label className="block font-semibold">Quantity</label>
 					<input
 						type="number"
-						{...register("quantity", { required: true, min: 1 })}
+						{...register("quantity", { required: true})}
 						className="w-full border px-3 py-2 rounded"
 						placeholder="Enter quantity"
 					/>
