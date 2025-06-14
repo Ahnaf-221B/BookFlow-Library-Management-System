@@ -27,56 +27,55 @@ const BookDetails = () => {
 		);
 	}
 
-	// Handle borrow form submission
-	// const handleBorrow = async (e) => {
-	// 	e.preventDefault();
+	const handleBorrow = async (e) => {
+		e.preventDefault();
+		if (!returnDate) return alert("Please select a return date.");
+		if (book.quantity <= 0) return alert("Book not available.");
 
-	// 	if (!returnDate) {
-	// 		alert("Please select a return date.");
-	// 		return;
-	// 	}
+		setLoading(true);
 
-	// 	if (book.quantity <= 0) {
-	// 		alert("Sorry, this book is not available to borrow.");
-	// 		return;
-	// 	}
+		try {
+			// Update book: decrease quantity & push user to borrowed array
+			const updatedBook = {
+				quantity: book.quantity - 1,
+				$push: {
+					borrowed: {
+						userEmail: user.email,
+						userName: user.displayName,
+						returnDate,
+						borrowDate: new Date().toISOString(),
+					},
+				},
+			};
 
-	// 	setLoading(true);
+			await axios.patch(
+				`http://localhost:3000/books/borrow/${book._id}`,
+				updatedBook
+			);
 
-	// 	try {
-	// 		// 1. Update the book quantity on the server (reduce by 1)
-	// 		const updatedBookRes = await axios.patch(
-	// 			`http://localhost:3000/books/${id}`,
-	// 			{
-	// 				quantity: book.quantity - 1,
-	// 			}
-	// 		);
-
-	// 		setBook(updatedBookRes.data);
-
-	// 		// 2. Add to borrowed books list on server
-	// 		await axios.post(`http://localhost:3000/borrowedBooks`, {
-	// 			bookId: book._id || book.id || id,
-	// 			title: book.title,
-	// 			author: book.author,
-	// 			image: book.image,
-	// 			userId: user.id,
-	// 			userName: user.displayName,
-	// 			userEmail: user.email,
-	// 			returnDate,
-	// 		});
-
-	// 		alert("Book borrowed successfully!");
-	// 		setIsModalOpen(false);
-	// 		setReturnDate("");
-	// 	} catch (error) {
-	// 		console.error("Error borrowing book:", error);
-	// 		alert("Failed to borrow the book. Please try again.");
-	// 	} finally {
-	// 		setLoading(false);
-	// 	}
-	// };
-
+			alert("Book borrowed!");
+			setIsModalOpen(false);
+			setReturnDate("");
+			setBook((prev) => ({
+				...prev,
+				quantity: prev.quantity - 1,
+				borrowed: [
+					...(prev.borrowed || []),
+					{
+						userEmail: user.email,
+						userName: user.displayName,
+						returnDate,
+						borrowDate: new Date().toISOString(),
+					},
+				],
+			}));
+		} catch (error) {
+			console.error(error);
+			alert("Borrow failed.");
+		} finally {
+			setLoading(false);
+		}
+	};
 	return (
 		<div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10 relative">
 			<img
@@ -128,7 +127,7 @@ const BookDetails = () => {
 					>
 						<h2 className="text-xl font-bold mb-4">Borrow "{book.title}"</h2>
 
-						<form >
+						<form onSubmit={handleBorrow} className="space-y-4">
 							<div className="mb-3">
 								<label className="block mb-1 font-semibold" htmlFor="name">
 									Name
@@ -136,7 +135,7 @@ const BookDetails = () => {
 								<input
 									id="name"
 									type="text"
-									value={user.displayName}
+									value={user?.displayName}
 									readOnly
 									className="w-full border border-gray-300 rounded px-3 py-2 bg-gray-100"
 								/>
@@ -149,7 +148,7 @@ const BookDetails = () => {
 								<input
 									id="email"
 									type="email"
-									value={user.email}
+									value={user?.email}
 									readOnly
 									className="w-full border border-gray-300 rounded px-3 py-2 bg-gray-100"
 								/>
