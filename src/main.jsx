@@ -16,6 +16,7 @@ import AllBooks from './pages/AllBooks/AllBooks.jsx'
 import BookDetails from './pages/BookDetails/BookDetails.jsx'
 import BorrowedBooks from './pages/BorrowedBooks/BorrowedBooks.jsx'
 import UpdateBook from './pages/UpdateBook/UpdateBook.jsx'
+import PrivateRoute from './context/PrivateRoute.jsx'
 
 const router = createBrowserRouter([
 	{
@@ -36,15 +37,25 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/addbooks",
-				element: <AddBook></AddBook>,
+				element: (
+					<PrivateRoute>
+						<AddBook></AddBook>
+					</PrivateRoute>
+				),
 			},
 			{
 				path: "/category/:category",
-				element: <BookCategory></BookCategory>,
+				element:<PrivateRoute>
+					<BookCategory></BookCategory>
+				</PrivateRoute> 
 			},
 			{
 				path: "/allbooks",
-				element: <AllBooks></AllBooks>,
+				element: 
+					<PrivateRoute>
+						<AllBooks></AllBooks>,
+					</PrivateRoute>
+				
 			},
 			{
 				path: "/bookdetail/:id",
@@ -52,7 +63,9 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/borrowedbooks",
-				element: <BorrowedBooks></BorrowedBooks>,
+				element:<PrivateRoute>
+					<BorrowedBooks></BorrowedBooks>
+					</PrivateRoute>
 			},
 			{
 				path: "/update-book/:id",
@@ -67,6 +80,5 @@ createRoot(document.getElementById("root")).render(
       <ToastContainer></ToastContainer>
 		  <RouterProvider router={router}></RouterProvider>
     </AuthProvider>
-		
 	</StrictMode>
 );

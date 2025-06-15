@@ -1,18 +1,23 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
+import Swal from "sweetalert2";
 
 const BorrowedBooks = () => {
 	const { user } = useContext(AuthContext);
 	const [borrowedBooks, setBorrowedBooks] = useState([]);
 
 	useEffect(() => {
-		axios.get("http://localhost:3000/books").then((res) => {
-			const filtered = res.data.filter((book) =>
-				(book.borrowed || []).some((b) => b.userEmail === user.email)
-			);
-			setBorrowedBooks(filtered);
-		});
+		axios
+			.get("http://localhost:3000/books", {
+				headers: { authorization: `Bearer ${user.accessToken}` },
+			})
+			.then((res) => {
+				const filtered = res.data.filter((book) =>
+					(book.borrowed || []).some((b) => b.userEmail === user.email)
+				);
+				setBorrowedBooks(filtered);
+			});
 	}, [user.email]);
 
 	const handleReturn = async (bookId) => {
@@ -20,7 +25,13 @@ const BorrowedBooks = () => {
 			userEmail: user.email,
 		});
 		setBorrowedBooks((prev) => prev.filter((book) => book._id !== bookId));
-		alert("Book returned!");
+		Swal.fire({
+						position: "top-end",
+						icon: "success",
+						title: "Book Returned Successfully",
+						showConfirmButton: false,
+						timer: 1500,
+					});
 	};
 
 	return (
@@ -37,7 +48,7 @@ const BorrowedBooks = () => {
 								<img
 									src={book.image}
 									alt={book.title}
-									className="w-full h-48 object-contain mb-2"
+									className="w-full h-48 object-contain mb-2 bg-gray-200 rounded"
 								/>
 								<h3 className="text-xl font-semibold">{book.title}</h3>
 								<p>Category: {book.category}</p>

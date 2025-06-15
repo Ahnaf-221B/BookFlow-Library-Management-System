@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { FaStar } from "react-icons/fa";
 import { AuthContext } from "../../context/AuthContext";
+import Swal from "sweetalert2";
 
 const BookDetails = () => {
 	const { id } = useParams();
@@ -53,7 +54,13 @@ const BookDetails = () => {
 				updatedBook
 			);
 
-			alert("Book borrowed!");
+			Swal.fire({
+							position: "top-end",
+							icon: "success",
+							title: "Book Borrowed Successfully",
+							showConfirmButton: false,
+							timer: 1500,
+						});
 			setIsModalOpen(false);
 			setReturnDate("");
 			setBook((prev) => ({
@@ -76,6 +83,10 @@ const BookDetails = () => {
 			setLoading(false);
 		}
 	};
+
+	const hasUserBorrowed = book?.borrowed?.some(
+		(userBorrow) => userBorrow.userEmail === user.email
+	);
 	return (
 		<div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10 relative">
 			<img
@@ -105,16 +116,19 @@ const BookDetails = () => {
 
 			<button
 				onClick={() => setIsModalOpen(true)}
-				disabled={book.quantity === 0}
+				disabled={book.quantity === 0 || hasUserBorrowed}
 				className={`px-6 py-2 rounded text-white ${
-					book.quantity === 0
+					book.quantity === 0 || hasUserBorrowed
 						? "bg-gray-400 cursor-not-allowed"
 						: "bg-blue-600 hover:bg-blue-700"
 				}`}
 			>
-				Borrow
+				{book.quantity === 0
+					? "Not Available"
+					: hasUserBorrowed
+					? "Already Borrowed"
+					: "Borrow"}
 			</button>
-
 			{/* Modal */}
 			{isModalOpen && (
 				<div

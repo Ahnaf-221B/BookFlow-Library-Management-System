@@ -1,19 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import axios from "axios";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+
+
+const Spinner = () => (
+	<div className="flex justify-center items-center h-64">
+		<div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+	</div>
+);
+
 
 const AllBooks = () => {
 	const [books, setBooks] = useState([]);
 	const [showAll, setShowAll] = useState(false);
 	const [showAvailableOnly, setShowAvailableOnly] = useState(false);
-	const [viewMode, setViewMode] = useState("card"); // "card" or "table"
+	const [viewMode, setViewMode] = useState("card"); 
+	const [loading, setLoading] = useState(true);
+	const {user} =use(AuthContext);
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:3000/books")
+			.get("http://localhost:3000/books", {
+				headers: { authorization: `Bearer ${user.accessToken}` },
+			})
 			.then((res) => {
 				setBooks(res.data);
+				setLoading(false);
 			})
 			.catch((error) => {
 				console.error("Error fetching books:", error);
@@ -25,6 +39,8 @@ const AllBooks = () => {
 		: books;
 
 	const displayedBooks = showAll ? filteredBooks : filteredBooks.slice(0, 8);
+
+	if (loading) return <Spinner />;
 
 	return (
 		<div className="p-6">
@@ -64,7 +80,7 @@ const AllBooks = () => {
 							<img
 								src={book.image}
 								alt={book.title}
-								className="w-full h-48 object-contain bg-gray-200 mb-4"
+								className="w-full h-48 object-contain bg-gray-200 rounded mb-4"
 							/>
 							<h2 className="text-xl font-bold">{book.title}</h2>
 							<p className="text-gray-600">Author: {book.author}</p>

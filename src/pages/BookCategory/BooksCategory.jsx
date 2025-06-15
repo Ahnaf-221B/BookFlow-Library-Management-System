@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 import Rating from "react-rating";
+import { AuthContext } from "../../context/AuthContext";
 
 const BookCategory = () => {
 	const { category } = useParams();
 	const [books, setBooks] = useState([]);
+	const {user} =use(AuthContext);
+
 
 	useEffect(() => {
 		axios
-			.get(`http://localhost:3000/books/category/${category}`)
+	.get(`http://localhost:3000/books/category/${category}`
+		 )
 			.then((res) => {
 				setBooks(res.data);
 			})
@@ -29,7 +33,7 @@ const BookCategory = () => {
 						<img
 							src={book.image}
 							alt={book.title}
-							className="w-full bg-gray-200 h-48 object-contain mb-4"
+							className="w-full bg-gray-200 h-48 object-contain mb-4 rounded"
 						/>
 						<h2 className="text-xl font-bold">{book.title}</h2>
 						<p className="text-gray-600">Author: {book.author}</p>

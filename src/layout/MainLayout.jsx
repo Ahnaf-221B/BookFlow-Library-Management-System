@@ -1,17 +1,23 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigation } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import Loader from '../pages/Loader/Loader'
 
 const MainLayout = () => {
-  return (
-    <div>
-        <Navbar></Navbar>
+  const { state } = useNavigation();
 
-        <Outlet></Outlet>
-        <Footer></Footer>
-    </div>
-  )
+  return (
+		<div>
+			<Navbar></Navbar>
+
+			<main>
+        {state === "loading" ? <Loader></Loader> : <Outlet>
+          </Outlet>}</main>
+
+			<Footer></Footer>
+		</div>
+	);
 }
 
 export default MainLayout
