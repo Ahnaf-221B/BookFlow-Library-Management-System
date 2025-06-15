@@ -17,10 +17,12 @@ import BookDetails from './pages/BookDetails/BookDetails.jsx'
 import BorrowedBooks from './pages/BorrowedBooks/BorrowedBooks.jsx'
 import UpdateBook from './pages/UpdateBook/UpdateBook.jsx'
 import PrivateRoute from './context/PrivateRoute.jsx'
+import ErrorPage from './pages/ErrorPage/ErrorPage.jsx'
 
 const router = createBrowserRouter([
 	{
 		path: "/",
+		errorElement: <ErrorPage></ErrorPage>,
 		element: <MainLayout></MainLayout>,
 		children: [
 			{
