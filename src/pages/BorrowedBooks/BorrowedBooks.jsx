@@ -9,7 +9,7 @@ const BorrowedBooks = () => {
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:3000/books", {
+			.get("https://library-management-server-alpha-lake.vercel.app/books", {
 				headers: { authorization: `Bearer ${user.accessToken}` },
 			})
 			.then((res) => {
@@ -21,17 +21,20 @@ const BorrowedBooks = () => {
 	}, [user.email]);
 
 	const handleReturn = async (bookId) => {
-		await axios.patch(`http://localhost:3000/books/return/${bookId}`, {
-			userEmail: user.email,
-		});
+		await axios.patch(
+			`https://library-management-server-alpha-lake.vercel.app/books/return/${bookId}`,
+			{
+				userEmail: user.email,
+			}
+		);
 		setBorrowedBooks((prev) => prev.filter((book) => book._id !== bookId));
 		Swal.fire({
-						position: "top-end",
-						icon: "success",
-						title: "Book Returned Successfully",
-						showConfirmButton: false,
-						timer: 1500,
-					});
+			position: "top-end",
+			icon: "success",
+			title: "Book Returned Successfully",
+			showConfirmButton: false,
+			timer: 1500,
+		});
 	};
 
 	return (

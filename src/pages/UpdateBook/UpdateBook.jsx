@@ -17,18 +17,25 @@ const UpdateBook = () => {
 	} = useForm();
 
 	useEffect(() => {
-		axios.get(`http://localhost:3000/books/${id}`).then((res) => {
-			reset(res.data); 
-			setLoading(false);
-		});
+		axios
+			.get(
+				`https://library-management-server-alpha-lake.vercel.app/books/${id}`
+			)
+			.then((res) => {
+				reset(res.data);
+				setLoading(false);
+			});
 	}, [id, reset]);
 
 	const onSubmit = async (data) => {
 		try {
-			await axios.put(`http://localhost:3000/books/${id}`, {
-				...data,
-				rating: parseInt(data.rating),
-			});
+			await axios.put(
+				`https://library-management-server-alpha-lake.vercel.app/books/${id}`,
+				{
+					...data,
+					rating: parseInt(data.rating),
+				}
+			);
 			Swal.fire({
 				position: "top-end",
 				icon: "success",
@@ -39,7 +46,6 @@ const UpdateBook = () => {
 			navigate("/allbooks");
 		} catch (err) {
 			console.error(err);
-			
 		}
 	};
 

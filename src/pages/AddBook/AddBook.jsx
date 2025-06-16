@@ -7,23 +7,26 @@ const AddBook = () => {
 	const {
 		register,
 		handleSubmit,
-		
+
 		reset,
 		formState: { errors },
 	} = useForm();
 
 	const onSubmit = async (data) => {
-        const response = await axios.post("http://localhost:3000/books",data)
-		
-		console.log('Book addded successfully',response.data);
-        Swal.fire({
-					position: "top-end",
-					icon: "success",
-					title: "Recipe Added Successfully",
-					showConfirmButton: false,
-					timer: 1500,
-				});
-		
+		const response = await axios.post(
+			"https://library-management-server-alpha-lake.vercel.app/books",
+			data
+		);
+
+		console.log("Book addded successfully", response.data);
+		Swal.fire({
+			position: "top-end",
+			icon: "success",
+			title: "Book Added Successfully",
+			showConfirmButton: false,
+			timer: 1500,
+		});
+
 		reset();
 	};
 
@@ -37,7 +40,7 @@ const AddBook = () => {
 					<input
 						type="text"
 						placeholder="https://example.com/image.jpg"
-						{...register("imageUrl", { required: true })}
+						{...register("image", { required: true })}
 						className="w-full border px-3 py-2 rounded"
 					/>
 					{errors.image && (
@@ -64,7 +67,7 @@ const AddBook = () => {
 					<label className="block font-semibold">Quantity</label>
 					<input
 						type="number"
-						{...register("quantity", { required: true})}
+						{...register("quantity", { required: true })}
 						className="w-full border px-3 py-2 rounded"
 						placeholder="Enter quantity"
 					/>
@@ -98,7 +101,7 @@ const AddBook = () => {
 						<option value="Novel">Novel</option>
 						<option value="Thriller">Thriller</option>
 						<option value="History">History</option>
-						
+
 						<option value="Sci-Fi">Sci-Fi</option>
 					</select>
 					{errors.category && (
@@ -110,7 +113,7 @@ const AddBook = () => {
 				<div>
 					<label className="block font-semibold">Short Description</label>
 					<textarea
-						{...register("description", { required: true })}
+						{...register("shortDescription", { required: true })}
 						className="w-full border px-3 py-2 rounded"
 						placeholder="Enter a short description"
 					></textarea>

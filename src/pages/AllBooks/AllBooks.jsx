@@ -3,26 +3,21 @@ import axios from "axios";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import Loader from "../Loader/Loader";
 
-
-const Spinner = () => (
-	<div className="flex justify-center items-center h-64">
-		<div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-	</div>
-);
 
 
 const AllBooks = () => {
 	const [books, setBooks] = useState([]);
 	const [showAll, setShowAll] = useState(false);
 	const [showAvailableOnly, setShowAvailableOnly] = useState(false);
-	const [viewMode, setViewMode] = useState("card"); 
+	const [viewMode, setViewMode] = useState("card");
 	const [loading, setLoading] = useState(true);
-	const {user} =use(AuthContext);
+	const { user } = use(AuthContext);
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:3000/books", {
+			.get("https://library-management-server-alpha-lake.vercel.app/books", {
 				headers: { authorization: `Bearer ${user.accessToken}` },
 			})
 			.then((res) => {
@@ -40,7 +35,7 @@ const AllBooks = () => {
 
 	const displayedBooks = showAll ? filteredBooks : filteredBooks.slice(0, 8);
 
-	if (loading) return <Spinner />;
+	if (loading) return <Loader></Loader>;
 
 	return (
 		<div className="p-6">

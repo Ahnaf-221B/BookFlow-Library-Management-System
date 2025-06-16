@@ -4,26 +4,38 @@ import axios from "axios";
 
 import Rating from "react-rating";
 import { AuthContext } from "../../context/AuthContext";
+import Loader from "../Loader/Loader";
 
 const BookCategory = () => {
 	const { category } = useParams();
 	const [books, setBooks] = useState([]);
-	const {user} =use(AuthContext);
+	
+	const { loading,setLoading} = use(AuthContext);
 
 
 	useEffect(() => {
 		axios
-	.get(`http://localhost:3000/books/category/${category}`
-		 )
+			.get(
+				`https://library-management-server-alpha-lake.vercel.app/books/category/${category}`
+			)
 			.then((res) => {
 				setBooks(res.data);
+				setLoading(false);
 			})
 			.catch((err) => console.error(err));
 	}, [category]);
 
+	if( loading) {
+		return(
+			<Loader></Loader>
+		)
+	}
+		
+
 	return (
 		<div className="p-6">
 			<h1 className="text-3xl font-bold text-center mb-8">{category} Books</h1>
+
 			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 				{books.map((book) => (
 					<div
@@ -46,7 +58,6 @@ const BookCategory = () => {
 							fullSymbol={<span className="text-yellow-400 text-xl">★</span>}
 						/>
 						<br />
-						
 
 						<Link to={`/bookdetail/${book._id}`}>
 							<button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">

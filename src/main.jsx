@@ -61,7 +61,9 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/bookdetail/:id",
-				element: <BookDetails></BookDetails>,
+				element:<PrivateRoute>
+					<BookDetails></BookDetails>
+				</PrivateRoute> ,
 			},
 			{
 				path: "/borrowedbooks",

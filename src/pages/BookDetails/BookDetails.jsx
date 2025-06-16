@@ -11,11 +11,13 @@ const BookDetails = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [returnDate, setReturnDate] = useState("");
 	const [loading, setLoading] = useState(false);
-        const { user } = use(AuthContext);
+	const { user } = use(AuthContext);
 
 	useEffect(() => {
 		axios
-			.get(`http://localhost:3000/books/${id}`)
+			.get(
+				`https://library-management-server-alpha-lake.vercel.app/books/${id}`
+			)
 			.then((res) => {
 				setBook(res.data);
 			})
@@ -50,17 +52,17 @@ const BookDetails = () => {
 			};
 
 			await axios.patch(
-				`http://localhost:3000/books/borrow/${book._id}`,
+				`https://library-management-server-alpha-lake.vercel.app/books/borrow/${book._id}`,
 				updatedBook
 			);
 
 			Swal.fire({
-							position: "top-end",
-							icon: "success",
-							title: "Book Borrowed Successfully",
-							showConfirmButton: false,
-							timer: 1500,
-						});
+				position: "top-end",
+				icon: "success",
+				title: "Book Borrowed Successfully",
+				showConfirmButton: false,
+				timer: 1500,
+			});
 			setIsModalOpen(false);
 			setReturnDate("");
 			setBook((prev) => ({
