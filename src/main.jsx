@@ -55,7 +55,7 @@ const router = createBrowserRouter([
 				path: "/allbooks",
 				element: 
 					<PrivateRoute>
-						<AllBooks></AllBooks>,
+						<AllBooks></AllBooks>
 					</PrivateRoute>
 				
 			},

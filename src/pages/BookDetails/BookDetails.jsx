@@ -117,15 +117,21 @@ const BookDetails = () => {
 			<p className="text-gray-800 my-4">{book.shortDescription}</p>
 
 			<button
-				onClick={() => setIsModalOpen(true)}
-				disabled={book.quantity === 0 || hasUserBorrowed}
+				onClick={() => {
+					if (book && book.quantity > 0 && !hasUserBorrowed) {
+						setIsModalOpen(true);
+					}
+				}}
+				disabled={!book || book.quantity === 0 || hasUserBorrowed}
 				className={`px-6 py-2 rounded text-white ${
-					book.quantity === 0 || hasUserBorrowed
+					!book || book.quantity === 0 || hasUserBorrowed
 						? "bg-gray-400 cursor-not-allowed"
 						: "bg-blue-600 hover:bg-blue-700"
 				}`}
 			>
-				{book.quantity === 0
+				{!book
+					? "Loading..."
+					: book.quantity === 0
 					? "Not Available"
 					: hasUserBorrowed
 					? "Already Borrowed"

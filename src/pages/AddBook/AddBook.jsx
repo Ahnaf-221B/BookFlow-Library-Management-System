@@ -32,6 +32,7 @@ const AddBook = () => {
 
 	return (
 		<div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-xl mt-10">
+			<title>AddBook</title>
 			<h2 className="text-2xl font-bold mb-4 text-center">Add a New Book</h2>
 			<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 				{/* Book Cover Image */}

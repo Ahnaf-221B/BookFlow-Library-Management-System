@@ -4,8 +4,8 @@ import { AuthContext } from "../../context/AuthContext";
 import { toast, Bounce } from "react-toastify";
 
 const SignIn = () => {
-	const location = useLocation(); // Get the location where the user came from
-	const navigate = useNavigate(); // Navigation hook to navigate programmatically
+	const location = useLocation(); 
+	const navigate = useNavigate(); 
 	const { signInUser, registerGoogle } = useContext(AuthContext);
 	const emailRef = useRef();
 
@@ -15,7 +15,7 @@ const SignIn = () => {
 		const pass = e.target.password.value;
 
 		signInUser(email, pass)
-			.then((result) => {
+			.then(() => {
 				toast.success("Log in successful", {
 					position: "top-right",
 					autoClose: 5000,
@@ -48,7 +48,8 @@ const SignIn = () => {
 	// Handle Google Login
 	const handleGoogleLogin = () => {
 		registerGoogle()
-			.then((result) => {
+			.then(() => {
+				
 				toast.success("Log in successful", {
 					position: "top-right",
 					autoClose: 5000,
@@ -61,6 +62,8 @@ const SignIn = () => {
 					transition: Bounce,
 				});
 				navigate(`${location.state ? location.state : "/"}`);
+				console.log(navigate);
+				
 			})
 			.catch((error) => {
 				toast.error(`Google login failed: ${error.message}`, {

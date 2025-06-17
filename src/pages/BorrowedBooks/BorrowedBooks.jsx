@@ -39,6 +39,7 @@ const BorrowedBooks = () => {
 
 	return (
 		<div className="p-6 max-w-4xl mx-auto">
+			<title>Borrowed Book</title>
 			<h2 className="text-2xl font-bold mb-6">Your Borrowed Books</h2>
 			{borrowedBooks.length === 0 ? (
 				<p>No borrowed books.</p>

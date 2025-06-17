@@ -167,32 +167,26 @@ const Navbar = () => {
 					</>
 				) : (
 					<>
-						<div className="relative">
-							<button
-								onClick={toggleDropdown}
-								className="flex items-center space-x-2"
-							>
+						<div className="relative group">
+							<div className="flex items-center space-x-2 cursor-pointer">
 								<img
 									src={user.photoURL || "https://via.placeholder.com/40"}
 									alt="User Profile"
 									className="w-10 h-10 rounded-full"
 								/>
-							</button>
+							</div>
 
-							{dropdownOpen && (
-								<div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg w-48 max-w-xs h-auto z-50">
-									<div className="py-2 px-4 text-sm text-gray-700">
-										{/* <h2 className="font-bold text-lg">{user.displayName}</h2> */}
-										<div className="font-bold text-xl">{user.displayName}</div>
-										<button
-											onClick={handleSignOut}
-											className="btn btn-sm bg-red-700 rounded-lg text-left text-lg mt-4 py-3 px-4 text-white hover:bg-red-100"
-										>
-											Sign Out
-										</button>
-									</div>
+							<div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg w-48 max-w-xs h-auto z-50 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200">
+								<div className="py-2 px-4 text-sm text-gray-700">
+									<div className="font-bold text-xl">{user.displayName}</div>
+									<button
+										onClick={handleSignOut}
+										className="btn btn-sm bg-red-700 rounded-lg text-left text-lg mt-4 py-3 px-4 text-white hover:bg-red-100"
+									>
+										Sign Out
+									</button>
 								</div>
-							)}
+							</div>
 						</div>
 					</>
 				)}

@@ -39,6 +39,7 @@ const AllBooks = () => {
 
 	return (
 		<div className="p-6">
+			<title>AllBook</title>
 			<h1 className="text-3xl font-bold text-center mb-8">All Books</h1>
 
 			<div className="flex flex-wrap justify-center gap-4 mb-6">

@@ -20,16 +20,12 @@ const BookCategory = () => {
 			)
 			.then((res) => {
 				setBooks(res.data);
-				setLoading(false);
+				
 			})
 			.catch((err) => console.error(err));
 	}, [category]);
 
-	if( loading) {
-		return(
-			<Loader></Loader>
-		)
-	}
+	
 		
 
 	return (
