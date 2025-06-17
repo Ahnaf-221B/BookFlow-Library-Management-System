@@ -91,6 +91,7 @@ const BookDetails = () => {
 	);
 	return (
 		<div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10 relative">
+			<title>Book Details</title>
 			<img
 				src={book.image}
 				alt={book.title}
