@@ -18,6 +18,7 @@ import BorrowedBooks from './pages/BorrowedBooks/BorrowedBooks.jsx'
 import UpdateBook from './pages/UpdateBook/UpdateBook.jsx'
 import PrivateRoute from './context/PrivateRoute.jsx'
 import ErrorPage from './pages/ErrorPage/ErrorPage.jsx'
+import AboutUs from './components/AboutUs.jsx'
 
 const router = createBrowserRouter([
 	{
@@ -47,29 +48,41 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/category/:category",
-				element:<PrivateRoute>
-					<BookCategory></BookCategory>
-				</PrivateRoute> 
+				element: (
+					<PrivateRoute>
+						<BookCategory></BookCategory>
+					</PrivateRoute>
+				),
 			},
 			{
 				path: "/allbooks",
-				element: 
+				element: (
 					<PrivateRoute>
 						<AllBooks></AllBooks>
 					</PrivateRoute>
-				
+				),
+			},
+			{
+				path: "/aboutus",
+				element: (
+					<AboutUs></AboutUs>
+				),
 			},
 			{
 				path: "/bookdetail/:id",
-				element:<PrivateRoute>
-					<BookDetails></BookDetails>
-				</PrivateRoute> ,
+				element: (
+					<PrivateRoute>
+						<BookDetails></BookDetails>
+					</PrivateRoute>
+				),
 			},
 			{
 				path: "/borrowedbooks",
-				element:<PrivateRoute>
-					<BorrowedBooks></BorrowedBooks>
+				element: (
+					<PrivateRoute>
+						<BorrowedBooks></BorrowedBooks>
 					</PrivateRoute>
+				),
 			},
 			{
 				path: "/update-book/:id",

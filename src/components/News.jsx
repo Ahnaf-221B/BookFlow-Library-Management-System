@@ -44,7 +44,7 @@ const eventData = [
 
 const News = () => {
 	return (
-		<section className="mt-16 p-10 bg-gray-100 rounded-lg shadow-md">
+		<section className="mt-16 p-12 bg-gray-100 rounded-lg shadow-md">
 			<h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
 				Upcoming Events & Library News
 			</h2>

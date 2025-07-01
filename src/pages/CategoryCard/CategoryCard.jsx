@@ -14,7 +14,7 @@ const CategoryCard = () => {
 				Categories
 			</h1>
 
-			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
+			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-12 py-6">
 				<div
 					onClick={() => handleNavigate("Novel")}
 					className="rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 ease-in-out cursor-pointer"

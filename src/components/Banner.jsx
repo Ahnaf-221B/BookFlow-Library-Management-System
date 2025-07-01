@@ -61,13 +61,13 @@ const Banner = () => {
 			>
 				{bookData.map((book, index) => (
 					<SwiperSlide key={book.id}>
-						<div className="flex flex-col md:flex-row">
+						<div className="flex flex-col md:flex-row bg-white rounded-xl p-6">
 							{/* Motion Image */}
 							<motion.div
 								initial={{ opacity: 0, x: -100 }}
 								animate={activeIndex === index ? { opacity: 1, x: 0 } : {}}
 								transition={{ duration: 1 }}
-								className="relative h-60 w-full md:h-80 md:w-1/2"
+								className="relative h-60 w-full md:h-80 md:w-1/2 "
 							>
 								<img
 									src={book.image}
@@ -84,7 +84,7 @@ const Banner = () => {
 								initial={{ opacity: 0, y: 100 }}
 								animate={activeIndex === index ? { opacity: 1, y: 0 } : {}}
 								transition={{ duration: 1, delay: 0.2 }}
-								className="flex w-full flex-col justify-center p-6 md:w-1/2"
+								className="flex w-full flex-col justify-center p-6 md:w-1/2 "
 							>
 								<h2 className="mb-2 text-2xl font-bold text-gray-900">
 									{book.title}

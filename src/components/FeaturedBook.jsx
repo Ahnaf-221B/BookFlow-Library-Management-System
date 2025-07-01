@@ -41,7 +41,7 @@ const FeaturedBook = () => {
 	
 
 	return (
-		<section className="mt-16 p-10 bg-white rounded-lg shadow-md">
+		<section className="mt-16 p-12 bg-white rounded-lg shadow-md">
 			<h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
 				Featured Books
 			</h2>

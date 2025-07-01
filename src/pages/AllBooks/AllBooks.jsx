@@ -5,13 +5,12 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import Loader from "../Loader/Loader";
 
-
-
 const AllBooks = () => {
 	const [books, setBooks] = useState([]);
 	const [showAll, setShowAll] = useState(false);
 	const [showAvailableOnly, setShowAvailableOnly] = useState(false);
 	const [viewMode, setViewMode] = useState("card");
+	const [sortOption, setSortOption] = useState("default");
 	const [loading, setLoading] = useState(true);
 	const { user } = use(AuthContext);
 
@@ -33,9 +32,28 @@ const AllBooks = () => {
 		? books.filter((book) => book.quantity > 0)
 		: books;
 
-	const displayedBooks = showAll ? filteredBooks : filteredBooks.slice(0, 8);
+	const sortedBooks = [...filteredBooks].sort((a, b) => {
+		switch (sortOption) {
+			case "title-asc":
+				return a.title.localeCompare(b.title);
+			case "title-desc":
+				return b.title.localeCompare(a.title);
+			case "author-asc":
+				return a.author.localeCompare(b.author);
+			case "author-desc":
+				return b.author.localeCompare(a.author);
+			case "rating-desc":
+				return b.rating - a.rating;
+			case "rating-asc":
+				return a.rating - b.rating;
+			default:
+				return 0;
+		}
+	});
 
-	if (loading) return <Loader></Loader>;
+	const displayedBooks = showAll ? sortedBooks : sortedBooks.slice(0, 8);
+
+	if (loading) return <Loader />;
 
 	return (
 		<div className="p-6">
@@ -58,10 +76,24 @@ const AllBooks = () => {
 				<select
 					value={viewMode}
 					onChange={(e) => setViewMode(e.target.value)}
-					className="px-4 py-2 rounded bg-gray-200 text-gray-800"
+					className="px-4 py-2 rounded bg-white text-gray-800 "
 				>
 					<option value="card">Card View</option>
 					<option value="table">Table View</option>
+				</select>
+
+				<select
+					value={sortOption}
+					onChange={(e) => setSortOption(e.target.value)}
+					className="px-4 py-2 rounded bg-white text-gray-800  focus:outline-none "
+				>
+					<option value="default">Sort By</option>
+					<option value="title-asc">Title (A-Z)</option>
+					<option value="title-desc">Title (Z-A)</option>
+					<option value="author-asc">Author (A-Z)</option>
+					<option value="author-desc">Author (Z-A)</option>
+					<option value="rating-desc">Rating (High to Low)</option>
+					<option value="rating-asc">Rating (Low to High)</option>
 				</select>
 			</div>
 

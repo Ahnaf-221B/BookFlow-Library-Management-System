@@ -8,10 +8,10 @@ const MainLayout = () => {
   const { state } = useNavigation();
 
   return (
-		<div>
-			<Navbar></Navbar>
+		<div >
+			<Navbar ></Navbar>
 
-			<main>
+			<main className='min-h-screen '>
         {state === "loading" ? <Loader></Loader> : <Outlet>
           </Outlet>}</main>
 
