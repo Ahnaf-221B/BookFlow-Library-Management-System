@@ -73,7 +73,7 @@ const AddBook = () => {
 						placeholder="Enter quantity"
 					/>
 					{errors.quantity && (
-						<span className="text-red-500">Enter a valid quantity.</span>
+						<span className="text-red-500">Enter a valid Quantity.</span>
 					)}
 				</div>
 
