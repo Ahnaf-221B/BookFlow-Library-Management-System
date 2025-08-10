@@ -34,7 +34,7 @@ const bookData = [
 		title: "Sapiens: A Brief History of Humankind",
 		description:
 			"Yuval Noah Harari's groundbreaking look at the history of humanity from the Stone Age to the 21st century.",
-		author: "Yuval Noah Harari",
+		author: "Yuval Noah Hararii",
 		image: "https://i.postimg.cc/SKj90W29/image.png",
 		category: "Non-Fiction",
 		isbn: "978-0062316097",
