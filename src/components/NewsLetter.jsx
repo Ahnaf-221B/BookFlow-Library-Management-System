@@ -10,7 +10,7 @@ export default function NewsLetter() {
 				</h2>
 				<p className="text-gray-600 mb-8">
 					Get updates on new arrivals, exclusive recommendations, and upcoming
-					events in our library.
+					events in our library
 				</p>
 
 				<form
