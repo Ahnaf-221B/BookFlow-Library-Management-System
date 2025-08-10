@@ -71,7 +71,7 @@ const Navbar = () => {
 				</div>
 
 				{/* CENTER (Only desktop): Nav Links */}
-				<nav className="hidden md:flex space-x-6 font-semibold md:order-2">
+				<nav className="hidden md:flex space-x-7 font-semibold md:order-2">
 					<Link to="/" className="text-black hover:text-blue-600">
 						Home
 					</Link>
