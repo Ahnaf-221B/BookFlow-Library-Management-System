@@ -11,7 +11,7 @@ const bookData = [
 			"An acclaimed guide by James Clear that offers practical strategies for building good habits, breaking bad ones, and mastering the tiny behaviors that lead to remarkable results.",
 		author: "James Clear",
 		image: "https://i.postimg.cc/dQTNGC04/image.png",
-		category: "Self-Help",
+		category: "Self-Helpp",
 		isbn: "978-0735211292",
 	},
 	{
