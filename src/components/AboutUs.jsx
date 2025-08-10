@@ -17,7 +17,7 @@ const AboutUs = () => {
 				Whether managing a community collection or a vast academic archive, we
 				provide reliable tools that enhance efficiency and promote easy access
 				to knowledge. Our mission is to support lifelong learning by bridging
-				technology and literature.
+				technology and literature
 			</p>
 			<p className="text-base sm:text-lg leading-relaxed">
 				Join us on our journey to make library management smarter, faster, and
