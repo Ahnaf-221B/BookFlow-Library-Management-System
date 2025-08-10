@@ -68,7 +68,7 @@ const Footer = () => {
 
 				{/* Copyright */}
 				<div className="border-t border-slate-800 mt-8 pt-6 text-center md:flex md:justify-center  md:text-left">
-					<p className="text-white">© 2025 BookFlow All rights reserved.</p>
+					<p className="text-white">© 2025 BookFlow All Rights Reserved.</p>
 				</div>
 			</div>
 		</footer>
